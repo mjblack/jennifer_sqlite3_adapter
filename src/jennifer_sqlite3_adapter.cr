@@ -9,7 +9,7 @@ require "./sqlite3/functions"
 module Jennifer
   module SQLite3
     # Library version.
-    VERSION = "0.4.0"
+    VERSION = "0.4.1"
 
     class Adapter < Adapter::Base
       include ::Jennifer::Adapter::RequestMethods

@@ -1,21 +1,22 @@
 name: jennifer_sqlite3_adapter
-version: 0.4.0
-crystal: ">= 0.36.0"
+version: 0.4.1
+crystal: ">= 1.0.0, < 2.0.0"
 
 authors:
   - Roman Kalnytskyi <moranibaca@gmail.com>
+  - Matthew J. Black <mjblack@gmail.com>
 
 development_dependencies:
   sqlite3:
     github: crystal-lang/crystal-sqlite3
     version: "0.19.0"
   jennifer:
-    github: imdrasil/jennifer.cr
+    github: mjblack/jennifer.cr
     branch: master
   sam:
     github: imdrasil/sam.cr
   ameba:
     github: crystal-ameba/ameba
-    version: "= 1.2.0"
+    version: "~> 1.6.1"
 
 license: MIT
