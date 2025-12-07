@@ -193,7 +193,7 @@ module Jennifer
         MetaTable.table(name).first!.with_meta
       end
 
-      private def ignore_foreign_keys
+      private def ignore_foreign_keys(&)
         adapter.exec "PRAGMA foreign_keys=OFF"
         yield
         adapter.exec "PRAGMA foreign_keys=ON"
