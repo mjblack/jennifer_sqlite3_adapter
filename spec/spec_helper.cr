@@ -21,7 +21,7 @@ class Jennifer::SQLite3::CommandInterface
   end
 end
 
-def schema_rollback
+def schema_rollback(&)
   Spec.adapter.rollback_transaction
   yield
 ensure
