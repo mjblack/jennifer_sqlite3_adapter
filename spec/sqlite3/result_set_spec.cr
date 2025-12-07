@@ -34,7 +34,11 @@ describe SQLite3::ResultSet do
 
             result = rs.read(JSON::Any?)
             result.should be_a(JSON::Any)
-            result.not_nil!["likes"].as_a.should eq(["skating", "reading", "swimming"])
+            if res = result
+              res["likes"].as_a.should eq(["skating", "reading", "swimming"])
+            else
+              fail "result is nil"
+            end
           end
           executed = true
         end

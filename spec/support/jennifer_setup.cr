@@ -1,5 +1,5 @@
 require "jennifer"
-require "../src/jennifer_sqlite3_adapter"
+require "../../src/jennifer_sqlite3_adapter"
 
 module Spec
   class_getter logger_backend = Log::MemoryBackend.new

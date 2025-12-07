@@ -20,7 +20,11 @@ module Jennifer
         end
 
         def column!
-          column.not_nil!
+          if ret_column = column
+            ret_column
+          else
+            raise "Column is nil"
+          end
         end
 
         def desc?

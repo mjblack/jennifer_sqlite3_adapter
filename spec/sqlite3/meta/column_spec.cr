@@ -24,7 +24,7 @@ describe Jennifer::SQLite3::Column do
 
   describe "#default" do
     it { user_columns[1].default.should be_nil }
-    it { user_columns.find(&.name.==("admin")).not_nil!.default.should eq("false") }
+    it { user_columns.find!(&.name.==("admin")).default.should eq("false") }
   end
 
   describe "#nilable" do

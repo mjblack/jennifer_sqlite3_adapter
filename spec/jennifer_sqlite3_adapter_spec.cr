@@ -1,7 +1,5 @@
 require "./spec_helper"
 
-# TODO: test modal bool field
-
 describe Jennifer::SQLite3::Adapter do
   adapter = Spec.adapter
   user_columns_number = 6
