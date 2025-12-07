@@ -21,25 +21,6 @@ class Jennifer::SQLite3::CommandInterface
   end
 end
 
-module Spec
-  class_getter logger_backend = Log::MemoryBackend.new
-  class_getter logger = Log.for("db", Log::Severity::Debug)
-
-  def self.adapter
-    Jennifer::Adapter.default_adapter
-  end
-end
-
-def setup_jennifer
-  Jennifer::Config.configure do |conf|
-    conf.read("./spec/support/database.yml", "test")
-    conf.logger = Spec.logger
-    conf.verbose_migrations = false
-  end
-
-  Log.setup "db", :debug, Spec.logger_backend
-end
-
 def schema_rollback(&)
   Spec.adapter.rollback_transaction
   yield
