@@ -126,7 +126,9 @@ module Jennifer
               io << ", " if i != 0
               opts = {:primary => column.id, :type => column.type} of Symbol => Bool | String
               opts[:null] = false if column.nilable == false
-              opts[:default] = column.default.not_nil! if column.default
+              if column_default = column.default
+                opts[:default] = column_default
+              end
               column_definition(column.name, opts, io, true)
             end
 
@@ -193,7 +195,7 @@ module Jennifer
         MetaTable.table(name).first!.with_meta
       end
 
-      private def ignore_foreign_keys
+      private def ignore_foreign_keys(&)
         adapter.exec "PRAGMA foreign_keys=OFF"
         yield
         adapter.exec "PRAGMA foreign_keys=ON"

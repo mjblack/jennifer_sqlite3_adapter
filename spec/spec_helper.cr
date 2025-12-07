@@ -1,7 +1,7 @@
 require "spec"
-require "./jennifer_setup"
+require "./support/jennifer_setup"
 require "./support/feature_helper"
-require "./models"
+require "./support/models"
 # require "factory"
 require "./support/migrations/*"
 
@@ -21,7 +21,7 @@ class Jennifer::SQLite3::CommandInterface
   end
 end
 
-def schema_rollback
+def schema_rollback(&)
   Spec.adapter.rollback_transaction
   yield
 ensure

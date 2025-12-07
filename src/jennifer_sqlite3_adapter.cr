@@ -9,7 +9,7 @@ require "./sqlite3/functions"
 module Jennifer
   module SQLite3
     # Library version.
-    VERSION = "0.4.0"
+    VERSION = "0.4.2"
 
     class Adapter < Adapter::Base
       include ::Jennifer::Adapter::RequestMethods
@@ -122,7 +122,7 @@ module Jennifer
         end
       end
 
-      def with_table_lock(table : String, type : String = "default", &block)
+      def with_table_lock(table : String, type : String = "default", &)
         transaction do |t|
           config.logger.debug do
             "SQLite3 doesn't support manual locking table from prepared statement." \

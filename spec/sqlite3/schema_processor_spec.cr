@@ -55,7 +55,7 @@ describe Jennifer::SQLite3::SchemaProcessor do
           adapter.column_exists?("users", "age").should be_true
           User.all.count.should eq(2)
           adapter.index_exists?("users", "name_index").should be_true
-          master_class.table("users").first!.columns.find(&.name.==("age")).not_nil!.default.should eq("12")
+          master_class.table("users").first!.columns.find!(&.name.==("age")).default.should eq("12")
         end
       end
     end
@@ -71,7 +71,7 @@ describe Jennifer::SQLite3::SchemaProcessor do
           adapter.column_exists?("users", "age").should be_true
           User.all.count.should eq(2)
           adapter.index_exists?("users", "name_index").should be_true
-          master_class.table("users").first!.columns.find(&.name.==("age")).not_nil!.type.should eq("float")
+          master_class.table("users").first!.columns.find!(&.name.==("age")).type.downcase.should eq("float")
         end
       end
     end

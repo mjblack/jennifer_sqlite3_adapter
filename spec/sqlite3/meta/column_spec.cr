@@ -24,7 +24,7 @@ describe Jennifer::SQLite3::Column do
 
   describe "#default" do
     it { user_columns[1].default.should be_nil }
-    it { user_columns.find(&.name.==("admin")).not_nil!.default.should eq("false") }
+    it { user_columns.find!(&.name.==("admin")).default.should eq("false") }
   end
 
   describe "#nilable" do
@@ -33,8 +33,8 @@ describe Jennifer::SQLite3::Column do
   end
 
   describe "#type" do
-    it { user_columns[1].type.should eq("varchar") }
-    it { user_columns[2].type.should eq("integer") }
+    it { user_columns[1].type.downcase.should eq("varchar") }
+    it { user_columns[2].type.downcase.should eq("integer") }
   end
 
   describe "#name" do

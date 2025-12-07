@@ -9,11 +9,15 @@ describe Jennifer::SQLite3::CommandInterface do
         interface = described_class.new(Jennifer::Config.config)
         interface.create_database
 
-        interface.last_command.not_nil!.tap do |command|
-          command.executable.should eq("sqlite3")
-          command.options.should eq(["./test.db", ""])
-          command.in_stream.should be_empty
-          command.out_stream.should be_empty
+        if last_command = interface.last_command
+          last_command.tap do |command|
+            command.executable.should eq("sqlite3")
+            command.options.should eq(["./test.db", ""])
+            command.in_stream.should be_empty
+            command.out_stream.should be_empty
+          end
+        else
+          fail "last_command is nil"
         end
       end
     end
@@ -25,11 +29,15 @@ describe Jennifer::SQLite3::CommandInterface do
         interface = described_class.new(Jennifer::Config.config)
         interface.drop_database
 
-        interface.last_command.not_nil!.tap do |command|
-          command.executable.should eq("rm")
-          command.options.should eq(["./test.db"])
-          command.in_stream.should be_empty
-          command.out_stream.should be_empty
+        if last_command = interface.last_command
+          last_command.tap do |command|
+            command.executable.should eq("rm")
+            command.options.should eq(["./test.db"])
+            command.in_stream.should be_empty
+            command.out_stream.should be_empty
+          end
+        else
+          fail "last_command is nil"
         end
       end
     end
@@ -41,11 +49,15 @@ describe Jennifer::SQLite3::CommandInterface do
         interface = described_class.new(Jennifer::Config.config)
         interface.generate_schema
 
-        interface.last_command.not_nil!.tap do |command|
-          command.executable.should eq("sqlite3")
-          command.options.should eq(["./test.db", ".schema"])
-          command.in_stream.should be_empty
-          command.out_stream.should eq(" | grep -v sqlite_sequence > ./spec/support/structure.sql")
+        if last_command = interface.last_command
+          last_command.tap do |command|
+            command.executable.should eq("sqlite3")
+            command.options.should eq(["./test.db", ".schema"])
+            command.in_stream.should be_empty
+            command.out_stream.should eq(" | grep -v sqlite_sequence > ./spec/support/structure.sql")
+          end
+        else
+          fail "last_command is nil"
         end
       end
     end
@@ -59,11 +71,15 @@ describe Jennifer::SQLite3::CommandInterface do
         Jennifer::Migration::Runner.create
         interface.load_schema
 
-        interface.last_command.not_nil!.tap do |command|
-          command.executable.should eq("sqlite3")
-          command.options.should eq(["./test.db"])
-          command.in_stream.should eq("cat ./spec/support/structure.sql |")
-          command.out_stream.should be_empty
+        if last_command = interface.last_command
+          last_command.tap do |command|
+            command.executable.should eq("sqlite3")
+            command.options.should eq(["./test.db"])
+            command.in_stream.should eq("cat ./spec/support/structure.sql |")
+            command.out_stream.should be_empty
+          end
+        else
+          fail "last_command is nil"
         end
       end
     end
